@@ -32,6 +32,10 @@ const MathInline = Node.create({
           const $start = state.doc.resolve(start);
           const $end = state.doc.resolve(end);
 
+          if (!match[1]) {
+            return null;
+          }
+
           if (!$start.parent.canReplaceWith($start.index(), $end.index(), this.type)) {
             return null;
           }
@@ -45,6 +49,8 @@ const MathInline = Node.create({
             end,
             this.type.create({}, this.type.schema.text(match[1])),
           );
+
+          return;
         },
       }),
     ];
@@ -64,6 +70,10 @@ const wrapMathFormula = (
   to: number,
 ): Transaction => {
   const mathNodeType = schema.nodes["math_inline"];
+
+  if (!mathNodeType) {
+    return transaction;
+  }
 
   const selectedText = transaction.doc.textBetween(from, to);
 
@@ -112,6 +122,10 @@ const toggleMathFormula = (editor: Editor, styles: OriginStyles) => {
   const { from, to, $from, empty } = selection;
   const mathNodeType = schema.nodes["math_inline"];
 
+  if (!mathNodeType) {
+    return;
+  }
+
   let transaction = state.tr;
   let nodeToUnwrap: { node: ProseMirrorNode; pos: number } | null = null;
   let finalSelectionPos: number | null = null;
@@ -120,12 +134,12 @@ const toggleMathFormula = (editor: Editor, styles: OriginStyles) => {
   if (selection instanceof NodeSelection && selection.node.type === mathNodeType) {
     nodeToUnwrap = { node: selection.node, pos: $from.pos };
   } else if (empty) {
-    if ($from.nodeBefore?.type === mathNodeType) {
+    if ($from.nodeBefore && $from.nodeBefore.type === mathNodeType) {
       nodeToUnwrap = {
         node: $from.nodeBefore,
         pos: $from.pos - $from.nodeBefore.nodeSize,
       };
-    } else if ($from.nodeAfter?.type === mathNodeType) {
+    } else if ($from.nodeAfter && $from.nodeAfter.type === mathNodeType) {
       if ($from.pos === from && state.doc.resolve(from).nodeAfter === $from.nodeAfter) {
         nodeToUnwrap = { node: $from.nodeAfter, pos: $from.pos };
       }
