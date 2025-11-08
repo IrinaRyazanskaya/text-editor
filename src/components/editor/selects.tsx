@@ -3,22 +3,7 @@ import { type ReactNode, type ChangeEvent } from "react";
 
 import { ArrowUpAndDownIcon } from "./icons";
 
-const selectStyles = cn(
-  "w-[76px]",
-  "outline-none",
-  "cursor-pointer",
-  "appearance-none",
-  "focus:outline-none",
-);
-
-const selectIconStyles = cn(
-  "flex",
-  "absolute",
-  "right-0",
-  "inset-y-0",
-  "items-center",
-  "pointer-events-none",
-);
+import "./selects.css";
 
 type BaseMenuSelectProps = {
   value: string;
@@ -37,17 +22,21 @@ const BaseMenuSelect = ({
   ariaLabel,
   className,
 }: BaseMenuSelectProps) => (
-  <div className="relative">
+  <div className="editor-select">
     <select
       value={value}
       disabled={disabled}
       onChange={onChange}
       aria-label={ariaLabel}
-      className={cn(selectStyles, disabled && "opacity-50", className)}
+      className={cn(
+        className,
+        "editor-select__picker",
+        disabled && "editor-select__picker_disabled",
+      )}
     >
       {children}
     </select>
-    <div className={cn(selectIconStyles, disabled && "opacity-50")}>
+    <div className={cn("editor-select__icon", disabled && "editor-select__icon_disabled")}>
       <ArrowUpAndDownIcon />
     </div>
   </div>
