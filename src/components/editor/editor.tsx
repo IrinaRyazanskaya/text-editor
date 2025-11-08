@@ -1,6 +1,5 @@
 import cn from "classnames";
-import * as React from "react";
-import { useMemo } from "react";
+import { type HTMLAttributes, useMemo, forwardRef } from "react";
 import { EditorProvider } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
 import { TextAlign } from "@tiptap/extension-text-align";
@@ -22,7 +21,7 @@ import { Menu } from "./menu";
 import "katex/dist/katex.min.css";
 import "./editor.css";
 
-type EditorProps = Omit<React.HTMLAttributes<HTMLDivElement>, "ref"> & {
+type EditorProps = Omit<HTMLAttributes<HTMLDivElement>, "ref"> & {
   variant?: "simple" | "full";
   disabled?: boolean;
   showError?: boolean;
@@ -48,7 +47,7 @@ const codeStyles = cn(
   "prose-p:my-0",
 );
 
-const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
+const Editor = forwardRef<HTMLDivElement, EditorProps>(
   ({ variant = "simple", disabled, showError, placeholder, onContentChange, ...props }, ref) => {
     const extensions = useMemo(
       () => [
@@ -120,7 +119,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
         {...props}
       >
         <EditorProvider
-          slotBefore={<Menu variant={variant} disabled={disabled} />}
+          slotBefore={<Menu variant={variant} disabled={disabled === true} />}
           extensions={extensions}
           editorContainerProps={{
             className: cn(

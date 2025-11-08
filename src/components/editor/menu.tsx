@@ -1,5 +1,5 @@
 import cn from "classnames";
-import * as React from "react";
+import { type FC, type HTMLAttributes, type ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import { useCurrentEditor } from "@tiptap/react";
 
@@ -32,19 +32,18 @@ import {
   defaultFontSize,
   defaultStyle,
   defaultTextAlign,
-  defaultTextDirection,
 } from "./defaults";
 import { clearMathFormula, getStyleFontSize } from "./extensions";
 import { useHeadingReset } from "./hooks";
 import { FontFamilySelect, FontSizeSelect, StyleSelect } from "./selects";
 import type { Variant } from "./types";
 
-type MenuProps = Omit<React.HTMLAttributes<HTMLDivElement>, "ref"> & {
+type MenuProps = Omit<HTMLAttributes<HTMLDivElement>, "ref"> & {
   variant?: Variant;
   disabled?: boolean;
 };
 
-const Menu: React.FC<MenuProps> = ({ variant = "simple", disabled, ...props }) => {
+const Menu: FC<MenuProps> = ({ variant = "simple", disabled, ...props }) => {
   const { editor } = useCurrentEditor();
 
   const [style, setStyle] = useState(defaultStyle);
@@ -73,7 +72,7 @@ const Menu: React.FC<MenuProps> = ({ variant = "simple", disabled, ...props }) =
     return null;
   }
 
-  const handleStyleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleStyleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const style = event.target.value;
     const fontSize = getStyleFontSize(style);
 
@@ -88,13 +87,13 @@ const Menu: React.FC<MenuProps> = ({ variant = "simple", disabled, ...props }) =
     setFontSize(fontSize);
   };
 
-  const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleColorChange = (event: ChangeEvent<HTMLInputElement>) => {
     const color = event.target.value;
     setFontColor(color);
     editor.chain().focus().setColor(color).run();
   };
 
-  const handleBackgroundColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBackgroundColorChange = (event: ChangeEvent<HTMLInputElement>) => {
     const color = event.target.value;
     setBackgroundColor(color);
     editor.chain().focus().setHighlight({ color }).run();
@@ -108,7 +107,6 @@ const Menu: React.FC<MenuProps> = ({ variant = "simple", disabled, ...props }) =
     editor.commands.unsetHighlight();
     editor.commands.unsetLink();
     editor.commands.setTextAlign(defaultTextAlign);
-    editor.commands.setTextDirection(defaultTextDirection);
     clearMathFormula(editor, {
       color: defaultFontColor,
       fontSize: defaultFontSize,
@@ -139,7 +137,7 @@ const Menu: React.FC<MenuProps> = ({ variant = "simple", disabled, ...props }) =
       <div className="flex gap-4">
         <FontFamilySelect
           value={fontFamily}
-          disabled={disabled}
+          disabled={disabled === true}
           onChange={(e) => {
             const font = e.target.value;
             setFontFamily(font);
@@ -150,7 +148,7 @@ const Menu: React.FC<MenuProps> = ({ variant = "simple", disabled, ...props }) =
           <>
             <FontSizeSelect
               value={fontSize}
-              disabled={disabled}
+              disabled={disabled === true}
               onChange={(e) => {
                 const size = e.target.value;
                 setFontSize(size);
@@ -158,56 +156,60 @@ const Menu: React.FC<MenuProps> = ({ variant = "simple", disabled, ...props }) =
               }}
             />
 
-            <StyleSelect value={style} disabled={disabled} onChange={handleStyleChange} />
+            <StyleSelect value={style} disabled={disabled === true} onChange={handleStyleChange} />
           </>
         )}
       </div>
 
-      <BoldButton disabled={disabled} />
-      <ItalicButton disabled={disabled} />
-      <UnderlineButton disabled={disabled} />
-      <StrikeButton disabled={disabled} />
+      <BoldButton disabled={disabled === true} />
+      <ItalicButton disabled={disabled === true} />
+      <UnderlineButton disabled={disabled === true} />
+      <StrikeButton disabled={disabled === true} />
 
       {variant === "full" && (
         <>
-          <FontColorButton value={fontColor} disabled={disabled} onChange={handleColorChange} />
+          <FontColorButton
+            value={fontColor}
+            disabled={disabled === true}
+            onChange={handleColorChange}
+          />
           <BackgroundColorButton
             value={backgroundColor}
-            disabled={disabled}
+            disabled={disabled === true}
             onChange={handleBackgroundColorChange}
           />
         </>
       )}
 
-      <OrderedListButton disabled={disabled} />
-      <BulletListButton disabled={disabled} />
+      <OrderedListButton disabled={disabled === true} />
+      <BulletListButton disabled={disabled === true} />
 
       {variant === "full" && (
         <>
-          <DecreaseIndentButton disabled={disabled} />
-          <IncreaseIndentButton disabled={disabled} />
-          <SuperscriptButton disabled={disabled} />
-          <SubscriptButton disabled={disabled} />
-          <CodeButton disabled={disabled} />
-          <BlockquoteButton disabled={disabled} />
+          <DecreaseIndentButton disabled={disabled === true} />
+          <IncreaseIndentButton disabled={disabled === true} />
+          <SuperscriptButton disabled={disabled === true} />
+          <SubscriptButton disabled={disabled === true} />
+          <CodeButton disabled={disabled === true} />
+          <BlockquoteButton disabled={disabled === true} />
         </>
       )}
 
-      <TextAlignButton disabled={disabled} />
-      <LinkButton disabled={disabled} />
-      <ImageButton disabled={disabled} />
-      <VideoButton disabled={disabled} />
+      <TextAlignButton disabled={disabled === true} />
+      <LinkButton disabled={disabled === true} />
+      <ImageButton disabled={disabled === true} />
+      <VideoButton disabled={disabled === true} />
 
       {variant === "full" && (
         <MathButton
-          disabled={disabled}
+          disabled={disabled === true}
           fontColor={fontColor}
           fontSize={fontSize}
           fontFamily={fontFamily}
         />
       )}
 
-      <ClearButton disabled={disabled} onReset={resetAllStyles} />
+      <ClearButton disabled={disabled === true} onReset={resetAllStyles} />
     </div>
   );
 };
