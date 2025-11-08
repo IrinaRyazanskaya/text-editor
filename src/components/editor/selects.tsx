@@ -1,7 +1,7 @@
 import cn from "classnames";
-import * as React from "react";
+import { type ReactNode, type ChangeEvent } from "react";
 
-import { ArrowUpAndDownIcon } from "../../../../icons";
+import { ArrowUpAndDownIcon } from "./icons";
 
 const selectStyles = cn(
   "w-[76px]",
@@ -25,8 +25,8 @@ type BaseMenuSelectProps = {
   disabled?: boolean;
   ariaLabel: string;
   className?: string;
-  children: React.ReactNode;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  children: ReactNode;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 };
 
 const BaseMenuSelect = ({
@@ -55,16 +55,21 @@ const BaseMenuSelect = ({
 
 BaseMenuSelect.displayName = "BaseMenuSelect";
 
-export const StyleSelect = ({
+const StyleSelect = ({
   value,
   onChange,
   disabled,
 }: {
   value: string;
   disabled?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }) => (
-  <BaseMenuSelect value={value} disabled={disabled} onChange={onChange} ariaLabel="Font Style">
+  <BaseMenuSelect
+    value={value}
+    onChange={onChange}
+    ariaLabel="Font Style"
+    disabled={disabled === true}
+  >
     <option value="normal">Normal</option>
     <option value="h1">H1</option>
     <option value="h2">H2</option>
@@ -74,16 +79,21 @@ export const StyleSelect = ({
 
 StyleSelect.displayName = "StyleSelect";
 
-export const FontSizeSelect = ({
+const FontSizeSelect = ({
   value,
   onChange,
   disabled,
 }: {
   value: string;
   disabled?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }) => (
-  <BaseMenuSelect value={value} disabled={disabled} onChange={onChange} ariaLabel="Font Size">
+  <BaseMenuSelect
+    value={value}
+    onChange={onChange}
+    ariaLabel="Font Size"
+    disabled={disabled === true}
+  >
     <option value="12px">12px</option>
     <option value="14px">14px</option>
     <option value="16px">16px</option>
@@ -95,16 +105,21 @@ export const FontSizeSelect = ({
 
 FontSizeSelect.displayName = "FontSizeSelect";
 
-export const FontFamilySelect = ({
+const FontFamilySelect = ({
   value,
   onChange,
   disabled,
 }: {
   value: string;
   disabled?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }) => (
-  <BaseMenuSelect value={value} disabled={disabled} onChange={onChange} ariaLabel="Font Family">
+  <BaseMenuSelect
+    value={value}
+    onChange={onChange}
+    ariaLabel="Font Family"
+    disabled={disabled === true}
+  >
     <option value="Arial">Arial</option>
     <option value="Inter">Inter</option>
     <option value="Georgia">Georgia</option>
@@ -114,3 +129,5 @@ export const FontFamilySelect = ({
 );
 
 FontFamilySelect.displayName = "FontFamilySelect";
+
+export { StyleSelect, FontSizeSelect, FontFamilySelect };

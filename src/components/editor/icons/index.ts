@@ -1,6 +1,7 @@
 import AlignCenterIcon from "./align-center.svg?react";
 import AlignLeftIcon from "./align-left.svg?react";
 import AlignRightIcon from "./align-right.svg?react";
+import ArrowUpAndDownIcon from "./arrow-up-and-down.svg?react";
 import BoldIcon from "./bold.svg?react";
 import BulletListIcon from "./bullet-list.svg?react";
 import ClearIcon from "./clear-styles.svg?react";
@@ -25,6 +26,7 @@ export {
   AlignCenterIcon,
   AlignLeftIcon,
   AlignRightIcon,
+  ArrowUpAndDownIcon,
   BoldIcon,
   BulletListIcon,
   ClearIcon,
