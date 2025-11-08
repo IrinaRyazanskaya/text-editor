@@ -1,4 +1,78 @@
-.ProseMirror .is-empty::before {
+.editor {
+  overflow: hidden;
+
+  width: 100%;
+  border: 1px solid currentcolor;
+  border-color: #d1d5db;
+  border-radius: 0.5rem;
+}
+
+.editor_disabled {
+  pointer-events: none;
+  border-color: #f3f4f6;
+}
+
+.editor_with-error {
+  border-color: #ef4444;
+}
+
+.editor__container {
+  overflow: auto;
+
+  width: 100%;
+  max-width: none;
+  min-height: 138px;
+  padding: 1rem;
+
+  color: #1f2937;
+
+  background-color: #f3f4f6;
+  outline: none;
+}
+
+.editor__container p,
+.editor__container div {
+  margin: 0;
+  outline: none;
+}
+
+.editor__container div:focus {
+  outline: none;
+}
+
+.editor__container_disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  background-color: #f3f4f6;
+}
+
+.editor__container_with-error {
+  background-color: #fef2f2;
+}
+
+.editor .prose p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.editor .prose code {
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+
+  font-family: monospace;
+  color: #1f2937;
+
+  background-color: #e5e7eb;
+}
+
+.editor .prose blockquote {
+  padding-left: 1rem;
+  border-left: 4px solid #9ca3af;
+  font-style: italic;
+  color: #4b5563;
+}
+
+.editor .ProseMirror .is-empty::before {
   pointer-events: none;
   content: attr(data-placeholder);
 
@@ -29,38 +103,38 @@
   transition-property: opacity;
 }
 
-.ProseMirror:focus .is-empty::before {
+.editor .ProseMirror:focus .is-empty::before {
   opacity: 0;
 }
 
-.ProseMirror [data-indent="1"] {
+.editor .ProseMirror [data-indent="1"] {
   padding-left: 1rem;
 }
 
-.ProseMirror [data-indent="2"] {
+.editor .ProseMirror [data-indent="2"] {
   padding-left: 2rem;
 }
 
-.ProseMirror [data-indent="3"] {
+.editor .ProseMirror [data-indent="3"] {
   padding-left: 3rem;
 }
 
-.ProseMirror [data-indent="4"] {
+.editor .ProseMirror [data-indent="4"] {
   padding-left: 4rem;
 }
 
-.ProseMirror [data-indent="5"] {
+.editor .ProseMirror [data-indent="5"] {
   padding-left: 5rem;
 }
 
-.ProseMirror [data-indent="6"] {
+.editor .ProseMirror [data-indent="6"] {
   padding-left: 6rem;
 }
 
-.ProseMirror [data-indent="7"] {
+.editor .ProseMirror [data-indent="7"] {
   padding-left: 7rem;
 }
 
-.ProseMirror [data-indent="8"] {
+.editor .ProseMirror [data-indent="8"] {
   padding-left: 8rem;
 }

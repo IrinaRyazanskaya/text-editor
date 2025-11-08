@@ -29,24 +29,6 @@ type EditorProps = Omit<HTMLAttributes<HTMLDivElement>, "ref"> & {
   onContentChange: (content: EditorContent) => void;
 };
 
-const quoteStyles = cn(
-  "prose-blockquote:pl-4",
-  "prose-blockquote:border-l-4",
-  "prose-blockquote:border-gray-400",
-  "prose-blockquote:italic",
-  "prose-blockquote:text-gray-600",
-);
-
-const codeStyles = cn(
-  "prose-code:font-mono",
-  "prose-code:bg-gray-200",
-  "prose-code:rounded",
-  "prose-code:px-1",
-  "prose-code:py-0.5",
-  "prose-code:text-gray-800",
-  "prose-p:my-0",
-);
-
 const Editor = forwardRef<HTMLDivElement, EditorProps>(
   ({ variant = "simple", disabled, showError, placeholder, onContentChange, ...props }, ref) => {
     const extensions = useMemo(
@@ -106,16 +88,7 @@ const Editor = forwardRef<HTMLDivElement, EditorProps>(
     return (
       <div
         ref={ref}
-        data-testid="Editor"
-        className={cn(
-          "border",
-          "border-gray",
-          "rounded-lg",
-          "overflow-hidden",
-          "w-full",
-          disabled && "border-gray-100 pointer-events-none",
-          showError && "border-red-500",
-        )}
+        className={cn("editor", disabled && "editor_disabled", showError && "editor_with-error")}
         {...props}
       >
         <EditorProvider
@@ -125,21 +98,9 @@ const Editor = forwardRef<HTMLDivElement, EditorProps>(
             className: cn(
               "prose",
               "prose-compact",
-              "p-4",
-              "w-full",
-              "max-w-none",
-              "min-h-[138px]",
-              "bg-gray-100",
-              "prose-p:my-0",
-              "text-gray-800",
-              "overflow-auto",
-              "outline-none",
-              "[&_div]:outline-none",
-              "[&_div]:focus:outline-none",
-              codeStyles,
-              quoteStyles,
-              disabled && "bg-gray-100 opacity-40 pointer-events-none",
-              showError && "bg-red-50",
+              "editor__container",
+              disabled && "editor__container_disabled",
+              showError && "editor__container_with-error",
             ),
           }}
           onUpdate={({ editor }) => {
