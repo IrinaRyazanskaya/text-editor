@@ -1,42 +1,66 @@
 .ProseMirror .is-empty::before {
-  @apply h-0
-		float-left
-		font-sans
-		opacity-100
-		text-gray-400
-		transition-opacity
-		duration-300
-		ease-in-out
-		pointer-events-none;
+  pointer-events: none;
   content: attr(data-placeholder);
-  font-family: "Manrope", sans-serif;
+
+  float: left;
+
+  height: 0;
+
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+  color: #cbd5e0;
+
+  opacity: 1;
+
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transition-property: opacity;
 }
 
 .ProseMirror:focus .is-empty::before {
-  @apply opacity-0;
+  opacity: 0;
 }
 
 .ProseMirror [data-indent="1"] {
-  @apply pl-4;
+  padding-left: 1rem;
 }
+
 .ProseMirror [data-indent="2"] {
-  @apply pl-8;
+  padding-left: 2rem;
 }
+
 .ProseMirror [data-indent="3"] {
-  @apply pl-12;
+  padding-left: 3rem;
 }
+
 .ProseMirror [data-indent="4"] {
-  @apply pl-16;
+  padding-left: 4rem;
 }
+
 .ProseMirror [data-indent="5"] {
-  @apply pl-20;
+  padding-left: 5rem;
 }
+
 .ProseMirror [data-indent="6"] {
-  @apply pl-24;
+  padding-left: 6rem;
 }
+
 .ProseMirror [data-indent="7"] {
-  @apply pl-28;
+  padding-left: 7rem;
 }
+
 .ProseMirror [data-indent="8"] {
-  @apply pl-32;
+  padding-left: 8rem;
 }
