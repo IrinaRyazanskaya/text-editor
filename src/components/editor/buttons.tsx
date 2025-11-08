@@ -29,21 +29,7 @@ import {
 import { toggleMathFormula } from "./extensions";
 import type { TextAlignment } from "./types";
 
-const activeButtonStyles = "bg-grey-transparent24";
-
-const getButtonStyles = (disabled?: boolean) =>
-  cn(
-    "w-6",
-    "h-6",
-    "p-0",
-    "flex",
-    "rounded-md",
-    "items-center",
-    "justify-center",
-    "hover:bg-grey-transparent12",
-    "transition-colors duration-200 ease-in-out",
-    disabled && "opacity-50",
-  );
+import "./buttons.css";
 
 type BaseMenuButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   active?: boolean;
@@ -58,14 +44,15 @@ const BaseMenuButton: FC<BaseMenuButtonProps> = ({
   className,
   ...props
 }: BaseMenuButtonProps) => {
-  const buttonStyles = getButtonStyles(disabled);
+  const buttonStyles = cn(
+    className,
+    "editor-button",
+    active && "editor-button_active",
+    disabled && "editor-button_disabled",
+  );
 
   return (
-    <button
-      className={cn(buttonStyles, active && activeButtonStyles, className)}
-      disabled={disabled === true}
-      {...props}
-    >
+    <button className={buttonStyles} disabled={disabled === true} {...props}>
       {children}
     </button>
   );
@@ -181,23 +168,10 @@ const FontColorButton: FC<FontColorButtonProps> = ({ value, disabled, onChange }
       type="button"
       title="Font Color"
       disabled={disabled === true}
-      className={cn("overflow-hidden", "relative")}
+      className="editor-button_type_font-color"
     >
       <FontColor />
-      <input
-        type="color"
-        value={value}
-        onChange={onChange}
-        className={cn(
-          "absolute",
-          "top-0",
-          "left-0",
-          "w-full",
-          "h-full",
-          "opacity-0",
-          "cursor-pointer",
-        )}
-      />
+      <input type="color" value={value} onChange={onChange} className="editor-button__input" />
     </BaseMenuButton>
   );
 };
@@ -216,23 +190,10 @@ const BackgroundColorButton: FC<BackgroundColorButtonProps> = ({ value, disabled
       type="button"
       title="Background Color"
       disabled={disabled === true}
-      className={cn("overflow-hidden", "relative")}
+      className="editor-button_type_background-color"
     >
       <Shading />
-      <input
-        type="color"
-        value={value}
-        onChange={onChange}
-        className={cn(
-          "absolute",
-          "top-0",
-          "left-0",
-          "w-full",
-          "h-full",
-          "opacity-0",
-          "cursor-pointer",
-        )}
-      />
+      <input type="color" value={value} onChange={onChange} className="editor-button__input" />
     </BaseMenuButton>
   );
 };
