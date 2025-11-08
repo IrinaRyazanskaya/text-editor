@@ -120,15 +120,22 @@ const Video = Node.create({
                 const reader = new FileReader();
 
                 reader.onload = (readerEvent) => {
-                  const node = view.state.schema.nodes["video"].create({
+                  const videoNode = view.state.schema.nodes["video"];
+
+                  if (!videoNode) {
+                    return;
+                  }
+
+                  const node = videoNode.create({
                     src: readerEvent.target?.result,
                   });
 
                   if (coordinates && typeof coordinates.pos === "number") {
                     const transaction = view.state.tr.insert(coordinates?.pos, node);
-
                     view.dispatch(transaction);
                   }
+
+                  return;
                 };
 
                 reader.readAsDataURL(video);
