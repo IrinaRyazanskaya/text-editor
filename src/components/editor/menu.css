@@ -1,0 +1,20 @@
+.editor-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  padding: 0.25rem 1rem;
+  border-color: gray;
+  border-bottom: 1px solid;
+
+  background-color: white;
+}
+
+.editor-menu_disabled {
+  border-color: #f7fafc;
+}
+
+.editor-menu__left-pane {
+  display: flex;
+  gap: 1rem;
+}

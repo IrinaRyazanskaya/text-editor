@@ -120,21 +120,8 @@ const Menu: FC<MenuProps> = ({ variant = "simple", disabled, ...props }) => {
   };
 
   return (
-    <div
-      className={cn(
-        "flex",
-        "flex-wrap",
-        "gap-2",
-        "px-4",
-        "py-1",
-        "bg-white",
-        "border-b",
-        "border-gray",
-        disabled && "border-gray-100",
-      )}
-      {...props}
-    >
-      <div className="flex gap-4">
+    <div className={cn("editor-menu", disabled && "editor-menu_disabled")} {...props}>
+      <div className="editor-menu__left-pane">
         <FontFamilySelect
           value={fontFamily}
           disabled={disabled === true}
