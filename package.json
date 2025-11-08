@@ -8,6 +8,8 @@
     "build": "vite build",
     "build-check": "tsc -b",
     "preview": "vite preview",
+    "storybook:start": "storybook dev --no-open --port 6006",
+    "storybook:build": "storybook build",
     "format": "prettier --write .",
     "format-check": "prettier --check .",
     "lint": "npm run lint:ts && npm run lint:styles",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
+    "@storybook/react-vite": "^10.0.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
