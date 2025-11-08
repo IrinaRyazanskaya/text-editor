@@ -1,0 +1,42 @@
+.ProseMirror .is-empty::before {
+  @apply h-0
+		float-left
+		font-sans
+		opacity-100
+		text-gray-400
+		transition-opacity
+		duration-300
+		ease-in-out
+		pointer-events-none;
+  content: attr(data-placeholder);
+  font-family: "Manrope", sans-serif;
+}
+
+.ProseMirror:focus .is-empty::before {
+  @apply opacity-0;
+}
+
+.ProseMirror [data-indent="1"] {
+  @apply pl-4;
+}
+.ProseMirror [data-indent="2"] {
+  @apply pl-8;
+}
+.ProseMirror [data-indent="3"] {
+  @apply pl-12;
+}
+.ProseMirror [data-indent="4"] {
+  @apply pl-16;
+}
+.ProseMirror [data-indent="5"] {
+  @apply pl-20;
+}
+.ProseMirror [data-indent="6"] {
+  @apply pl-24;
+}
+.ProseMirror [data-indent="7"] {
+  @apply pl-28;
+}
+.ProseMirror [data-indent="8"] {
+  @apply pl-32;
+}

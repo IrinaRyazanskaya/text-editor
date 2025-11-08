@@ -1,0 +1,641 @@
+import cn from "classnames";
+import { type FC, type ButtonHTMLAttributes, type ChangeEvent } from "react";
+import { useCurrentEditor } from "@tiptap/react";
+
+import {
+  AlignCenterIcon,
+  AlignLeftIcon,
+  AlignRightIcon,
+  BoldIcon,
+  BulletListIcon,
+  ClearIcon,
+  Code,
+  DecreaseIndent,
+  FontColor,
+  ImageIcon,
+  IncreaseIndent,
+  ItalicIcon,
+  LinkIcon,
+  Math,
+  OrderedListIcon,
+  Quote,
+  Shading,
+  StrikeIcon,
+  Subscript,
+  Superscript,
+  UnderlineIcon,
+  VideoIcon,
+} from "./icons";
+import { toggleMathFormula } from "./extensions";
+import type { TextAlignment } from "./types";
+
+const activeButtonStyles = "bg-grey-transparent24";
+
+const getButtonStyles = (disabled?: boolean) =>
+  cn(
+    "w-6",
+    "h-6",
+    "p-0",
+    "flex",
+    "rounded-md",
+    "items-center",
+    "justify-center",
+    "hover:bg-grey-transparent12",
+    "transition-colors duration-200 ease-in-out",
+    disabled && "opacity-50",
+  );
+
+type BaseMenuButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  active?: boolean;
+  disabled?: boolean;
+  className?: string;
+};
+
+const BaseMenuButton: FC<BaseMenuButtonProps> = ({
+  active,
+  disabled,
+  children,
+  className,
+  ...props
+}: BaseMenuButtonProps) => {
+  const buttonStyles = getButtonStyles(disabled);
+
+  return (
+    <button
+      className={cn(buttonStyles, active && activeButtonStyles, className)}
+      disabled={disabled === true}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+BaseMenuButton.displayName = "BaseMenuButton";
+
+type BoldButtonProps = {
+  disabled?: boolean;
+};
+
+const BoldButton: FC<BoldButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      disabled={disabled === true}
+      active={editor.isActive("bold")}
+      onClick={() => editor.chain().focus().toggleBold().run()}
+    >
+      <BoldIcon />
+    </BaseMenuButton>
+  );
+};
+
+BoldButton.displayName = "BoldButton";
+
+type ItalicButtonProps = {
+  disabled?: boolean;
+};
+
+const ItalicButton: FC<ItalicButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      disabled={disabled === true}
+      active={editor.isActive("italic")}
+      onClick={() => editor.chain().focus().toggleItalic().run()}
+    >
+      <ItalicIcon />
+    </BaseMenuButton>
+  );
+};
+
+ItalicButton.displayName = "ItalicButton";
+
+type UnderlineButtonProps = {
+  disabled?: boolean;
+};
+
+const UnderlineButton: FC<UnderlineButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      disabled={disabled === true}
+      active={editor.isActive("underline")}
+      onClick={() => void editor.chain().focus().toggleUnderline().run()}
+    >
+      <UnderlineIcon />
+    </BaseMenuButton>
+  );
+};
+
+UnderlineButton.displayName = "UnderlineButton";
+
+type StrikeButtonProps = {
+  disabled?: boolean;
+};
+
+const StrikeButton: FC<StrikeButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      disabled={disabled === true}
+      active={editor.isActive("strike")}
+      onClick={() => editor.chain().focus().toggleStrike().run()}
+    >
+      <StrikeIcon />
+    </BaseMenuButton>
+  );
+};
+
+StrikeButton.displayName = "StrikeButton";
+
+type FontColorButtonProps = {
+  value: string;
+  disabled?: boolean;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+
+const FontColorButton: FC<FontColorButtonProps> = ({ value, disabled, onChange }) => {
+  return (
+    <BaseMenuButton
+      type="button"
+      title="Font Color"
+      disabled={disabled === true}
+      className={cn("overflow-hidden", "relative")}
+    >
+      <FontColor />
+      <input
+        type="color"
+        value={value}
+        onChange={onChange}
+        className={cn(
+          "absolute",
+          "top-0",
+          "left-0",
+          "w-full",
+          "h-full",
+          "opacity-0",
+          "cursor-pointer",
+        )}
+      />
+    </BaseMenuButton>
+  );
+};
+
+FontColorButton.displayName = "FontColorButton";
+
+type BackgroundColorButtonProps = {
+  value: string;
+  disabled?: boolean;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+
+const BackgroundColorButton: FC<BackgroundColorButtonProps> = ({ value, disabled, onChange }) => {
+  return (
+    <BaseMenuButton
+      type="button"
+      title="Background Color"
+      disabled={disabled === true}
+      className={cn("overflow-hidden", "relative")}
+    >
+      <Shading />
+      <input
+        type="color"
+        value={value}
+        onChange={onChange}
+        className={cn(
+          "absolute",
+          "top-0",
+          "left-0",
+          "w-full",
+          "h-full",
+          "opacity-0",
+          "cursor-pointer",
+        )}
+      />
+    </BaseMenuButton>
+  );
+};
+
+BackgroundColorButton.displayName = "BackgroundColorButton";
+
+type OrderedListButtonProps = {
+  disabled?: boolean;
+};
+
+const OrderedListButton: FC<OrderedListButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      disabled={disabled === true}
+      active={editor.isActive("orderedList")}
+      onClick={() => editor.chain().focus().toggleOrderedList().run()}
+    >
+      <OrderedListIcon />
+    </BaseMenuButton>
+  );
+};
+
+OrderedListButton.displayName = "OrderedListButton";
+
+type BulletListButtonProps = {
+  disabled?: boolean;
+};
+
+const BulletListButton: FC<BulletListButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      disabled={disabled === true}
+      active={editor.isActive("bulletList")}
+      onClick={() => editor.chain().focus().toggleBulletList().run()}
+    >
+      <BulletListIcon />
+    </BaseMenuButton>
+  );
+};
+
+BulletListButton.displayName = "BulletListButton";
+
+type DecreaseIndentButtonProps = {
+  disabled?: boolean;
+};
+
+const DecreaseIndentButton: FC<DecreaseIndentButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      title="Decrease indent"
+      disabled={disabled === true}
+      onClick={() => editor.chain().focus().outdent().run()}
+    >
+      <DecreaseIndent />
+    </BaseMenuButton>
+  );
+};
+
+DecreaseIndentButton.displayName = "DecreaseIndentButton";
+
+type IncreaseIndentButtonProps = {
+  disabled?: boolean;
+};
+
+const IncreaseIndentButton: FC<IncreaseIndentButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      title="Increase indent"
+      disabled={disabled === true}
+      onClick={() => editor.chain().focus().indent().run()}
+    >
+      <IncreaseIndent />
+    </BaseMenuButton>
+  );
+};
+
+IncreaseIndentButton.displayName = "IncreaseIndentButton";
+
+type SuperscriptButtonProps = {
+  disabled?: boolean;
+};
+
+const SuperscriptButton: FC<SuperscriptButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      disabled={disabled === true}
+      active={editor.isActive("superscript")}
+      onClick={() => editor.chain().focus().toggleSuperscript().run()}
+    >
+      <Superscript />
+    </BaseMenuButton>
+  );
+};
+
+SuperscriptButton.displayName = "SuperscriptButton";
+
+type SubscriptButtonProps = {
+  disabled?: boolean;
+};
+
+const SubscriptButton: FC<SubscriptButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      disabled={disabled === true}
+      active={editor.isActive("subscript")}
+      onClick={() => editor.chain().focus().toggleSubscript().run()}
+    >
+      <Subscript />
+    </BaseMenuButton>
+  );
+};
+
+SubscriptButton.displayName = "SubscriptButton";
+
+type CodeButtonProps = {
+  disabled?: boolean;
+};
+
+const CodeButton: FC<CodeButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      disabled={disabled === true}
+      active={editor.isActive("code")}
+      onClick={() => editor.chain().focus().toggleCode().run()}
+    >
+      <Code />
+    </BaseMenuButton>
+  );
+};
+
+CodeButton.displayName = "CodeButton";
+
+type BlockquoteButtonProps = {
+  disabled?: boolean;
+};
+
+const BlockquoteButton: FC<BlockquoteButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <BaseMenuButton
+      disabled={disabled === true}
+      active={editor.isActive("blockquote")}
+      onClick={() => editor.chain().focus().toggleBlockquote().run()}
+    >
+      <Quote />
+    </BaseMenuButton>
+  );
+};
+
+BlockquoteButton.displayName = "BlockquoteButton";
+
+type TextAlignButtonProps = {
+  disabled?: boolean;
+};
+
+const TextAlignButton: FC<TextAlignButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  const alignments: TextAlignment[] = ["center", "right", "left"];
+
+  const currentAlignment =
+    alignments.find((align) => {
+      return editor.isActive({ textAlign: align });
+    }) ?? "left";
+  const currentIndex = alignments.indexOf(currentAlignment);
+  const nextAlignment = alignments[(currentIndex + 1) % alignments.length];
+
+  const handleClick = () => {
+    editor
+      .chain()
+      .focus()
+      .setTextAlign(nextAlignment ?? "left")
+      .run();
+  };
+
+  const getIcon = (align: TextAlignment) => {
+    switch (align) {
+      case "left":
+        return <AlignLeftIcon />;
+      case "center":
+        return <AlignCenterIcon />;
+      case "right":
+        return <AlignRightIcon />;
+      default:
+        return <AlignLeftIcon />;
+    }
+  };
+
+  return (
+    <BaseMenuButton
+      disabled={disabled === true}
+      onClick={handleClick}
+      active={editor.isActive({ textAlign: currentAlignment })}
+    >
+      {getIcon(currentAlignment)}
+    </BaseMenuButton>
+  );
+};
+
+TextAlignButton.displayName = "TextAlignButton";
+
+type LinkButtonProps = {
+  disabled?: boolean;
+};
+
+const LinkButton: FC<LinkButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  const handleClick = () => {
+    const url = window.prompt("Enter URL");
+    if (url) {
+      editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+    }
+  };
+
+  return (
+    <BaseMenuButton onClick={handleClick} disabled={disabled === true}>
+      <LinkIcon />
+    </BaseMenuButton>
+  );
+};
+
+LinkButton.displayName = "LinkButton";
+
+type ImageButtonProps = {
+  disabled?: boolean;
+};
+
+const ImageButton: FC<ImageButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  const handleClick = () => {
+    const url = window.prompt("Enter image URL");
+    if (url) {
+      editor.chain().focus().setImage({ src: url }).run();
+    }
+  };
+
+  return (
+    <BaseMenuButton onClick={handleClick} disabled={disabled === true}>
+      <ImageIcon />
+    </BaseMenuButton>
+  );
+};
+
+ImageButton.displayName = "ImageButton";
+
+type VideoButtonProps = {
+  disabled?: boolean;
+};
+
+const VideoButton: FC<VideoButtonProps> = ({ disabled }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  const handleClick = () => {
+    const url = window.prompt("Enter video URL");
+    if (url) {
+      editor.chain().focus().setVideo(url).run();
+    }
+  };
+
+  return (
+    <BaseMenuButton onClick={handleClick} disabled={disabled === true}>
+      <VideoIcon />
+    </BaseMenuButton>
+  );
+};
+
+VideoButton.displayName = "VideoButton";
+
+type MathButtonProps = {
+  disabled?: boolean;
+  fontColor: string;
+  fontSize: string;
+  fontFamily: string;
+};
+
+const MathButton: FC<MathButtonProps> = ({ disabled, fontColor, fontSize, fontFamily }) => {
+  const { editor } = useCurrentEditor();
+
+  if (!editor) {
+    return null;
+  }
+
+  const handleClick = () => {
+    toggleMathFormula(editor, {
+      color: fontColor,
+      fontSize: fontSize,
+      fontFamily: fontFamily,
+    });
+  };
+
+  return (
+    <BaseMenuButton
+      title="Math"
+      disabled={disabled === true}
+      onClick={handleClick}
+      active={editor.isActive("math_inline")}
+    >
+      <Math />
+    </BaseMenuButton>
+  );
+};
+
+MathButton.displayName = "MathButton";
+
+type ClearButtonProps = {
+  disabled?: boolean;
+  onReset: () => void;
+};
+
+const ClearButton: FC<ClearButtonProps> = ({ disabled, onReset }) => {
+  return (
+    <BaseMenuButton disabled={disabled === true} onClick={onReset}>
+      <ClearIcon />
+    </BaseMenuButton>
+  );
+};
+
+ClearButton.displayName = "ClearButton";
+
+export {
+  BackgroundColorButton,
+  BlockquoteButton,
+  BoldButton,
+  BulletListButton,
+  ClearButton,
+  CodeButton,
+  DecreaseIndentButton,
+  FontColorButton,
+  ImageButton,
+  IncreaseIndentButton,
+  ItalicButton,
+  LinkButton,
+  MathButton,
+  OrderedListButton,
+  StrikeButton,
+  SubscriptButton,
+  SuperscriptButton,
+  TextAlignButton,
+  UnderlineButton,
+  VideoButton,
+};
