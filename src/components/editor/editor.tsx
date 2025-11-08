@@ -5,8 +5,6 @@ import { StarterKit } from "@tiptap/starter-kit";
 import { TextAlign } from "@tiptap/extension-text-align";
 import { TextStyle } from "@tiptap/extension-text-style";
 import { FontFamily } from "@tiptap/extension-font-family";
-import { Underline } from "@tiptap/extension-underline";
-import { Link } from "@tiptap/extension-link";
 import { Image } from "@tiptap/extension-image";
 import { Placeholder } from "@tiptap/extension-placeholder";
 import { Color } from "@tiptap/extension-color";
@@ -34,6 +32,13 @@ const Editor = forwardRef<HTMLDivElement, EditorProps>(
     const extensions = useMemo(
       () => [
         StarterKit.configure({
+          link: {
+            autolink: true,
+            linkOnPaste: true,
+          },
+          heading: {
+            levels: [1, 2, 3],
+          },
           bulletList: {
             keepMarks: true,
             keepAttributes: false,
@@ -42,22 +47,14 @@ const Editor = forwardRef<HTMLDivElement, EditorProps>(
             keepMarks: true,
             keepAttributes: false,
           },
-          heading: {
-            levels: [1, 2, 3],
-          },
         }),
         TextStyle,
         FontFamily.configure({
           types: ["textStyle"],
         }),
-        Underline,
         TextAlign.configure({
           types: ["heading", "paragraph"],
           alignments: ["left", "center", "right"],
-        }),
-        Link.configure({
-          autolink: true,
-          linkOnPaste: true,
         }),
         Image,
         Video,
