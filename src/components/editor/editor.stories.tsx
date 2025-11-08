@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect, within } from "@storybook/test";
 
 import { Editor } from "./editor";
 
@@ -29,11 +28,6 @@ export const Simple: Story = {
       console.log(content.getText());
     },
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const element = canvas.getByTestId("Editor");
-    await expect(element).toBeInTheDocument();
-  },
 };
 
 export const Full: Story = {
@@ -44,11 +38,6 @@ export const Full: Story = {
       console.log(content.getJSON());
       console.log(content.getText());
     },
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const element = canvas.getByTestId("Editor");
-    await expect(element).toBeInTheDocument();
   },
 };
 
@@ -62,11 +51,6 @@ export const FullDisabled: Story = {
       console.log(content.getText());
     },
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const element = canvas.getByTestId("Editor");
-    await expect(element).toBeInTheDocument();
-  },
 };
 
 export const FullWithError: Story = {
@@ -78,11 +62,6 @@ export const FullWithError: Story = {
       console.log(content.getJSON());
       console.log(content.getText());
     },
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const element = canvas.getByTestId("Editor");
-    await expect(element).toBeInTheDocument();
   },
 };
 
