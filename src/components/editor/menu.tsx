@@ -34,7 +34,7 @@ import {
   defaultTextAlign,
 } from "./defaults";
 import { clearMathFormula, getStyleFontSize } from "./extensions";
-import { useHeadingReset } from "./hooks";
+import { useHeadingReset, useMenuSync } from "./hooks";
 import { FontFamilySelect, FontSizeSelect, StyleSelect } from "./selects";
 import type { Variant } from "./types";
 
@@ -67,6 +67,14 @@ const Menu: FC<MenuProps> = ({ variant = "simple", disabled, ...props }) => {
   useHeadingReset(editor, () => {
     setStyle(defaultStyle);
     setFontSize(defaultFontSize);
+  });
+
+  useMenuSync(editor, {
+    setStyle,
+    setFontSize,
+    setFontFamily,
+    setFontColor,
+    setBackgroundColor,
   });
 
   if (!editor) {
