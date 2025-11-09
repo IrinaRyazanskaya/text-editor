@@ -5,8 +5,7 @@
 .editor-select__picker {
   cursor: pointer;
 
-  width: 76px;
-  height: 1.5rem;
+  height: 28px;
   padding: 4px;
   border: 1px solid rgb(118 118 118);
   border-radius: 0.375rem;
@@ -21,6 +20,18 @@
 
 .editor-select__picker_disabled {
   opacity: 0.5;
+}
+
+.editor-select__picker_type_style {
+  width: 75px;
+}
+
+.editor-select__picker_type_font-size {
+  width: 60px;
+}
+
+.editor-select__picker_type_font-family {
+  width: 100px;
 }
 
 .editor-select__icon {

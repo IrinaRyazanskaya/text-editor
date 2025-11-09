@@ -58,6 +58,7 @@ const StyleSelect = ({
     onChange={onChange}
     ariaLabel="Font Style"
     disabled={disabled === true}
+    className="editor-select__picker_type_style"
   >
     <option value="normal">Normal</option>
     <option value="h1">H1</option>
@@ -82,6 +83,7 @@ const FontSizeSelect = ({
     onChange={onChange}
     ariaLabel="Font Size"
     disabled={disabled === true}
+    className="editor-select__picker_type_font-size"
   >
     <option value="12px">12px</option>
     <option value="14px">14px</option>
@@ -108,6 +110,7 @@ const FontFamilySelect = ({
     onChange={onChange}
     ariaLabel="Font Family"
     disabled={disabled === true}
+    className="editor-select__picker_type_font-family"
   >
     <option value="Arial">Arial</option>
     <option value="Inter">Inter</option>
