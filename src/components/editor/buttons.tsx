@@ -483,7 +483,7 @@ type ImageButtonProps = {
 };
 
 const ImageButton: FC<ImageButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -497,7 +497,11 @@ const ImageButton: FC<ImageButtonProps> = ({ disabled }) => {
   };
 
   return (
-    <BaseMenuButton onClick={handleClick} disabled={disabled === true}>
+    <BaseMenuButton
+      onClick={handleClick}
+      active={editor.isActive("image")}
+      disabled={disabled === true}
+    >
       <ImageIcon />
     </BaseMenuButton>
   );
@@ -510,7 +514,7 @@ type VideoButtonProps = {
 };
 
 const VideoButton: FC<VideoButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -524,7 +528,11 @@ const VideoButton: FC<VideoButtonProps> = ({ disabled }) => {
   };
 
   return (
-    <BaseMenuButton onClick={handleClick} disabled={disabled === true}>
+    <BaseMenuButton
+      onClick={handleClick}
+      active={editor.isActive("video")}
+      disabled={disabled === true}
+    >
       <VideoIcon />
     </BaseMenuButton>
   );
