@@ -67,8 +67,6 @@ const Editor = forwardRef<HTMLDivElement, EditorProps>(
         }),
         Placeholder.configure({
           placeholder: placeholder || "Write something awesome...",
-          showOnlyWhenEditable: true,
-          showOnlyCurrent: false,
         }),
         Superscript,
         Subscript,
