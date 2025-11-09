@@ -6,6 +6,7 @@
   padding: 0.25rem 1rem;
   border-color: #d1d5db;
   border-bottom: 1px solid #d1d5db;
+  border-radius: 0.5rem 0.5rem 0 0;
 
   background-color: #fff;
 }
