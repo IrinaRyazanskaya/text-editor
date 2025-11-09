@@ -38,6 +38,8 @@ import { useHeadingReset } from "./hooks";
 import { FontFamilySelect, FontSizeSelect, StyleSelect } from "./selects";
 import type { Variant } from "./types";
 
+import "./menu.css";
+
 type MenuProps = Omit<HTMLAttributes<HTMLDivElement>, "ref"> & {
   variant?: Variant;
   disabled?: boolean;
