@@ -17,11 +17,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
-  color: rgb(255 255 255 / 87%);
+  color: #000;
   text-rendering: optimizelegibility;
 
-  color-scheme: light dark;
-  background-color: #242424;
+  background-color: #fff;
 
   font-synthesis: none;
 }
