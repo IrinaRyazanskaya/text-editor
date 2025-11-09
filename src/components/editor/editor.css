@@ -1,6 +1,4 @@
 .editor {
-  overflow: hidden;
-
   width: 100%;
   border: 1px solid currentcolor;
   border-color: #d1d5db;
@@ -17,10 +15,6 @@
 }
 
 .editor__container {
-  overflow: auto;
-
-  width: 100%;
-  max-width: none;
   min-height: 138px;
   padding: 1rem;
 
