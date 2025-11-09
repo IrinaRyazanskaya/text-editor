@@ -7,7 +7,7 @@
   border-color: #d1d5db;
   border-bottom: 1px solid #d1d5db;
 
-  background-color: white;
+  background-color: #fff;
 }
 
 .editor-menu_disabled {
@@ -16,5 +16,5 @@
 
 .editor-menu__left-pane {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 }
