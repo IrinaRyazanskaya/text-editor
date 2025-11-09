@@ -1,0 +1,51 @@
+.editor-select {
+  position: relative;
+}
+
+.editor-select__picker {
+  cursor: pointer;
+
+  height: 28px;
+  padding: 4px;
+  border: 1px solid rgb(118 118 118);
+  border-radius: 0.375rem;
+
+  appearance: none;
+  outline: none;
+}
+
+.editor-select__picker:focus {
+  outline: none;
+}
+
+.editor-select__picker_disabled {
+  opacity: 0.5;
+}
+
+.editor-select__picker_type_style {
+  width: 75px;
+}
+
+.editor-select__picker_type_font-size {
+  width: 60px;
+}
+
+.editor-select__picker_type_font-family {
+  width: 100px;
+}
+
+.editor-select__icon {
+  pointer-events: none;
+
+  position: absolute;
+  top: 0;
+  right: 4px;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+}
+
+.editor-select__icon_disabled {
+  opacity: 0.5;
+}

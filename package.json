@@ -8,6 +8,8 @@
     "build": "vite build",
     "build-check": "tsc -b",
     "preview": "vite preview",
+    "storybook:start": "storybook dev --no-open --port 6006",
+    "storybook:build": "storybook build",
     "format": "prettier --write .",
     "format-check": "prettier --check .",
     "lint": "npm run lint:ts && npm run lint:styles",
@@ -18,11 +20,25 @@
     "lint-fix:styles": "stylelint --fix '**/*.css'"
   },
   "dependencies": {
+    "@benrbray/prosemirror-math": "^1.0.0",
+    "@tiptap/extension-color": "^3.0.0",
+    "@tiptap/extension-font-family": "^3.0.0",
+    "@tiptap/extension-highlight": "^3.0.0",
+    "@tiptap/extension-image": "^3.0.0",
+    "@tiptap/extension-placeholder": "^3.0.0",
+    "@tiptap/extension-subscript": "^3.0.0",
+    "@tiptap/extension-superscript": "^3.0.0",
+    "@tiptap/extension-text-align": "^3.0.0",
+    "@tiptap/extension-text-style": "^3.0.0",
+    "@tiptap/react": "^3.0.0",
+    "@tiptap/starter-kit": "^3.0.0",
+    "classnames": "^2.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
+    "@storybook/react-vite": "^10.0.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
@@ -37,6 +53,7 @@
     "stylelint-config-standard": "^39.0.0",
     "typescript": "^5.0.0",
     "typescript-eslint": "^8.0.0",
-    "vite": "^7.0.0"
+    "vite": "^7.0.0",
+    "vite-plugin-svgr": "^4.0.0"
   }
 }
