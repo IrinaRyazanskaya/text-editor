@@ -27,6 +27,7 @@ import {
   VideoIcon,
 } from "./icons";
 import { toggleMathFormula } from "./extensions";
+import { useReactiveEditor } from "./hooks";
 import type { TextAlignment } from "./types";
 
 import "./buttons.css";
@@ -65,7 +66,7 @@ type BoldButtonProps = {
 };
 
 const BoldButton: FC<BoldButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -89,7 +90,7 @@ type ItalicButtonProps = {
 };
 
 const ItalicButton: FC<ItalicButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -113,7 +114,7 @@ type UnderlineButtonProps = {
 };
 
 const UnderlineButton: FC<UnderlineButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -137,7 +138,7 @@ type StrikeButtonProps = {
 };
 
 const StrikeButton: FC<StrikeButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -205,7 +206,7 @@ type OrderedListButtonProps = {
 };
 
 const OrderedListButton: FC<OrderedListButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -229,7 +230,7 @@ type BulletListButtonProps = {
 };
 
 const BulletListButton: FC<BulletListButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -301,7 +302,7 @@ type SuperscriptButtonProps = {
 };
 
 const SuperscriptButton: FC<SuperscriptButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -325,7 +326,7 @@ type SubscriptButtonProps = {
 };
 
 const SubscriptButton: FC<SubscriptButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -349,7 +350,7 @@ type CodeButtonProps = {
 };
 
 const CodeButton: FC<CodeButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -373,7 +374,7 @@ type BlockquoteButtonProps = {
 };
 
 const BlockquoteButton: FC<BlockquoteButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -397,7 +398,7 @@ type TextAlignButtonProps = {
 };
 
 const TextAlignButton: FC<TextAlignButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -451,7 +452,7 @@ type LinkButtonProps = {
 };
 
 const LinkButton: FC<LinkButtonProps> = ({ disabled }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
@@ -465,7 +466,11 @@ const LinkButton: FC<LinkButtonProps> = ({ disabled }) => {
   };
 
   return (
-    <BaseMenuButton onClick={handleClick} disabled={disabled === true}>
+    <BaseMenuButton
+      onClick={handleClick}
+      active={editor.isActive("link")}
+      disabled={disabled === true}
+    >
       <LinkIcon />
     </BaseMenuButton>
   );
@@ -535,7 +540,7 @@ type MathButtonProps = {
 };
 
 const MathButton: FC<MathButtonProps> = ({ disabled, fontColor, fontSize, fontFamily }) => {
-  const { editor } = useCurrentEditor();
+  const editor = useReactiveEditor();
 
   if (!editor) {
     return null;
