@@ -59,7 +59,6 @@ const Menu: FC<MenuProps> = ({ variant = "simple", disabled, ...props }) => {
       return;
     }
 
-    setStyle(defaultStyle);
     editor.commands.setParagraph();
     editor.commands.setFontSize(defaultFontSize);
     editor.commands.setFontFamily(defaultFontFamily);
