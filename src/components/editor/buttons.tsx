@@ -164,10 +164,17 @@ type FontColorButtonProps = {
 };
 
 const FontColorButton: FC<FontColorButtonProps> = ({ value, disabled, onChange }) => {
+  const editor = useReactiveEditor();
+
+  if (!editor) {
+    return null;
+  }
+
   return (
     <BaseMenuButton
       type="button"
       title="Font Color"
+      active={editor.isActive("textStyle", { color: value })}
       disabled={disabled === true}
       className="editor-button_type_font-color"
     >
@@ -186,10 +193,17 @@ type BackgroundColorButtonProps = {
 };
 
 const BackgroundColorButton: FC<BackgroundColorButtonProps> = ({ value, disabled, onChange }) => {
+  const editor = useReactiveEditor();
+
+  if (!editor) {
+    return null;
+  }
+
   return (
     <BaseMenuButton
       type="button"
       title="Background Color"
+      active={editor.isActive("highlight")}
       disabled={disabled === true}
       className="editor-button_type_background-color"
     >
@@ -406,11 +420,10 @@ const TextAlignButton: FC<TextAlignButtonProps> = ({ disabled }) => {
 
   const alignments: TextAlignment[] = ["center", "right", "left"];
 
-  const currentAlignment =
-    alignments.find((align) => {
-      return editor.isActive({ textAlign: align });
-    }) ?? "left";
-  const currentIndex = alignments.indexOf(currentAlignment);
+  const currentAlignment = alignments.find((align) => {
+    return editor.isActive({ textAlign: align });
+  });
+  const currentIndex = alignments.indexOf(currentAlignment ?? "left");
   const nextAlignment = alignments[(currentIndex + 1) % alignments.length];
 
   const handleClick = () => {
@@ -438,9 +451,9 @@ const TextAlignButton: FC<TextAlignButtonProps> = ({ disabled }) => {
     <BaseMenuButton
       disabled={disabled === true}
       onClick={handleClick}
-      active={editor.isActive({ textAlign: currentAlignment })}
+      active={Boolean(currentAlignment) && editor.isActive({ textAlign: currentAlignment })}
     >
-      {getIcon(currentAlignment)}
+      {getIcon(currentAlignment ?? "left")}
     </BaseMenuButton>
   );
 };
